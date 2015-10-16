@@ -1,0 +1,12 @@
+Package: pollVizR
+Type: Package
+Title: Create Instant Poll Visualizations With Embedded Margins of Error
+Version: 0.1
+Date: 2015-10-16
+Author: Nick Neuteufel [aut, cre]
+Maintainer: Nick Neuteufel <nneuteufel@gmail.com>
+Description: Does what the title says. Based on ggplot2.
+License: GPL-3
+Imports: ggplot2, scales
+Suggests: wesanderson
+LazyData: TRUE
