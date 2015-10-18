@@ -1,16 +1,17 @@
 #' Importing Poll Data for Use in pollVizR
 #'
-#' This function allows you to import the data for use in pollVizR. Returns a dataframe with the choices, support, standard error, and selected confidence interval as well as an introductory return sentence.
+#' 0.1: This function allows you to import the data for use in pollVizR. Returns a dataframe with the choices, support, standard error, and selected confidence interval as well as an introductory return sentence.
+#' FUTURE: This function returns a list with a dataframe in [1], n in [2], and cI in [3] (reduces work in other functions).
 #' Run this before any other function in pollVizR.
 #' @param choices Vector representing candidate/party names. Defaults to "C1", "C2", and "Undecided."
 #' @param support Vector of percentage support. No default.
 #' @param n Number of poll respondents. No default.
 #' @param cI Confidence interval. Select from 0.95 (default), 0.8, 0.85, 0.9, and 0.99.
 #' @param decimal Is ``support" a decimal? If so, TRUE (default). If percentage, FALSE.
-#' @examples fake <- pollImport(choices=c("Eisenhower", "Clinton", "Washington"), support=c(0.45, 0.45, 0.05), n=250)
-#' @note Important to save as an object for pollViz
+#' @examples fake <- poll_Import(choices=c("A", "B", "C"), support=c(0.45, 0.45, 0.05), n=250)
+#' @note Important to save as an object for pollViz.
 
-pollImport <- function(choices=c("C1","C2","Undecided"), support, decimal=T, n, cI=0.95) {
+poll_Import <- function(choices=c("C1","C2","Undecided"), support, decimal=T, n, cI=0.95) {
   #Warning messages
   if (length(choices) != length(support)) {
     print("Your choices and support vectors do not match. You're going to have a bad time.")
@@ -32,7 +33,7 @@ pollImport <- function(choices=c("C1","C2","Undecided"), support, decimal=T, n, 
   #Calculate the standard error
   for (i in 1:length(support)) {
     q[i] <- 1-support[i]
-    se[i] <- sqrt(support[i]*q[i])/sqrt(n)
+    se[i] <- sqrt(support[i]*q[i])/sqrt(n-1)
   }
 
   #Set standard error coefficient
@@ -67,7 +68,6 @@ pollImport <- function(choices=c("C1","C2","Undecided"), support, decimal=T, n, 
   }
 
   pollResults <- data.frame(Choices = as.factor(choices), Support = as.numeric(support), SE = as.numeric(se), UpperCI = as.numeric(cIUpper), LowerCI = as.numeric(cILower))
-  #print(paste("Your data have been saved as a dataframe With ", length(choices), " choices and a ", cI, " confidence level. ", sep=""))
-  #print(pollResults)
+  #pollResults <- list(pollResults, n, cI)
   return(pollResults)
 }

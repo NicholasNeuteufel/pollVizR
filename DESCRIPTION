@@ -1,7 +1,8 @@
 Package: pollVizR
 Type: Package
 Title: Create Instant Poll Visualizations With Embedded Margins of Error
-Version: 0.1
+Version: 0.1.1
+Notes: 0.1.1 adds horizontal option, changes pollImport to poll_Import because san serif fonts are things, removes my name from the pollVizR promo, forces 0 on the axis in question, and uses sqrt(n-1) rather than sqrt(n) for calculating confidence intervals.
 Date: 2015-10-16
 Author: Nick Neuteufel [aut, cre]
 Maintainer: Nick Neuteufel <nneuteufel@gmail.com>
