@@ -17,6 +17,11 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+#R stuff
+.RData
+.RProj
+.RHistory
+
 # =========================
 # Operating System Files
 # =========================
